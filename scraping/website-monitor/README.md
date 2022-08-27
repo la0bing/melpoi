@@ -19,7 +19,8 @@ python website_monitor.py \
 --url <TARGET_URL> \
 --interval <CHECK_INTERVAL> \
 --html-threshold <HTML_THRESHOLD> \
---image-threshold <IMAGE_THRESHOLD>
+--image-threshold <IMAGE_THRESHOLD> \
+--target-xpath <TARGET_XPATH>
 ```
 
 The scripts accepts the following parameters and some is optional with default values:
@@ -27,5 +28,6 @@ The scripts accepts the following parameters and some is optional with default v
 - *(optional)* interval: Interval to check URL, unit is seconds, default to 86400 seconds, which is 1 day
 - *(optional)* html_threshold: HTML similarity threshold for website, range from 0 to 1, the higher the number the more similar the website, default to 0.9
 - *(optional)* image_threshold: Image similarity threshold for website, range from 0 to 1, the higher the number the more similar the website, default to 0.9
+- *(optional)* target_xpath: Target xpath to check for within the provided website., default to "/html/body"
 
 Use command ```python website_monitor.py --help``` for help.

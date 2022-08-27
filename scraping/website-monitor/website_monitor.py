@@ -21,16 +21,14 @@ def create_driver():
     return driver
 
 
-def capture_page(
-    url: str, image_filename: str, html_filename: str, target_tag: str = "body"
-):
+def capture_page(url: str, image_filename: str, html_filename: str, target_xpath: str):
     driver = create_driver()
     driver.get(url)
-    el = driver.find_element(By.TAG_NAME, target_tag)
+    el = driver.find_element(By.XPATH, target_xpath)
     total_height = el.size["height"] + 6000
     driver.set_window_size(1920, total_height)
     el.screenshot(image_filename)
-    out_html = driver.page_source
+    out_html = el.get_attribute("innerHTML")
     with open(html_filename, "w") as f:
         f.write(out_html)
     driver.close()
@@ -81,15 +79,16 @@ def detect_change(
     check_interval: int,
     image_similarity_threshold: float,
     html_similarity_threshold: float,
+    targer_xpath: str,
 ):
     # create dir to isolate different url
     url_dir = url.replace("https://", "").replace("/", "_").replace(".", "_")
     if not os.path.isdir(url_dir):
         os.mkdir(url_dir)
 
-    capture_page(url, f"{url_dir}/prev.png", f"{url_dir}/prev.html")
+    capture_page(url, f"{url_dir}/prev.png", f"{url_dir}/prev.html", targer_xpath)
     time.sleep(check_interval)
-    capture_page(url, f"{url_dir}/cur.png", f"{url_dir}/cur.html")
+    capture_page(url, f"{url_dir}/cur.png", f"{url_dir}/cur.html", targer_xpath)
     html_similarity = calculate_html_similarity(
         f"{url_dir}/prev.html", f"{url_dir}/cur.html"
     )
@@ -119,7 +118,7 @@ def detect_change(
         os.rename(f"{url_dir}/cur.html", f"{url_dir}/prev.html")
 
         # capture and check again
-        capture_page(url, f"{url_dir}/cur.png", f"{url_dir}/cur.html")
+        capture_page(url, f"{url_dir}/cur.png", f"{url_dir}/cur.html", targer_xpath)
 
         # html similarity
         html_similarity = calculate_html_similarity(
@@ -164,6 +163,12 @@ if __name__ == "__main__":
         help="Image similarity threshold for website, range from 0 to 1, the higher the number the more similar the website, default to 0.9",
         default=0.9,
     )
+    parser.add_argument(
+        "-t",
+        "--target-xpath",
+        help="Target xpath to check for within the provided website.",
+        default="/html/body",
+    )
     args = vars(parser.parse_args())
 
     URL = args["url"]
@@ -172,13 +177,15 @@ if __name__ == "__main__":
     check_interval = int(args["interval"])
     html_similarity_threshold = float(args["html_threshold"])
     image_similarity_threshold = float(args["image_threshold"])
+    targer_xpath = str(args["targer_xpath"])
 
     print(
         f'Monitoring website on "{URL}" every {check_interval}s, html_similarity_threshold: {html_similarity_threshold}, image_similarity_threshold: {image_similarity_threshold}'
     )
     detect_change(
-        URL,
+        url=URL,
         check_interval=check_interval,
         html_similarity_threshold=html_similarity_threshold,
         image_similarity_threshold=image_similarity_threshold,
+        targer_xpath=targer_xpath,
     )
