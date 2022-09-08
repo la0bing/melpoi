@@ -8,13 +8,19 @@ The following libraries are needed:
 
 ## Usage
 ```
-from parser import SQLAnalyzer
+from SQLAnalyzer import SQLAnalyzer
 
-sa = SQLAnalyzer("example.sql")
+sa = SQLAnalyzer("./")
 sa.plot_inline()
 ```
 Output:
-[![name](https://github.com/la0bing/melpy/blob/main/sql/SQLAnalyzer/example.png)](https://github.com/la0bing/melpy/blob/main/sql/SQLAnalyzer/example.png)
-Each of the box in the graph represents a separated sql statement that can be treated as a single script, this is to help understand where the scripts can be refactor into smaller pieces of scripts.
+[![name](https://github.com/la0bing/melpy/blob/main/sql/SQLAnalyzer/output.png)](https://github.com/la0bing/melpy/blob/main/sql/SQLAnalyzer/example.png)
+Each of the blue box in the graph represents a script found within the given path and the inner black box indicates a separate subquery within the scripts, it has a step_i indicator to follow through which part of the query will run first in the script. This way you can dump all sql scripts into a directory and let SQLAnalyzer do the dependencies checking for you. 
+
+***\*The red circle indicates a ```DELETE FROM``` statement.***
+
+<br />
+
+Others:
 
 ```SQLAnalyzer``` class has an optional parameter ```min_dot``` which look for the minimum amount of dot within a table name to recognize them as a real table name, as it is common to use CTE to represent temporary tables.
