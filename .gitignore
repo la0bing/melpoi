@@ -130,3 +130,6 @@ dmypy.json
 
 # macos stuff
 .DS_store
+
+# chromedriver
+chromedriver
