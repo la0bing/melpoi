@@ -1,5 +1,7 @@
 import os
 import re
+from tkinter.ttk import Style
+from turtle import color
 
 import graphviz
 from IPython.display import Image
@@ -7,9 +9,16 @@ from IPython.display import Image
 
 class SQLAnalyzer:
     def __init__(self, sql_filepath, min_dot=1) -> None:
-        self.sql_filepath = sql_filepath
         self.min_dot = min_dot
-        self.script_name = self.sql_filepath.split("/")[-1]
+        self.sql_filepath = sql_filepath
+        if sql_filepath.endswith(".sql"):
+            self.sql_scripts = [sql_filepath]
+        else:
+            if not sql_filepath.endswith(os.path.sep):
+                sql_filepath = sql_filepath + os.path.sep
+            self.sql_scripts = [
+                sql_filepath + x for x in os.listdir(sql_filepath) if x.endswith(".sql")
+            ]
 
     def remove_leading_comments(self, line):
         return re.sub("(--|#)+.*$", "", line)
@@ -37,7 +46,7 @@ class SQLAnalyzer:
             raise Exception("min_dot range must be between 0 and 2")
         # Source
         ## FROM (search for word after FROM with 2 dots in its name, with or without backticks)
-        from_tables = re.findall(f"FROM {table_regex}", query)
+        from_tables = re.findall(f"(?!DELETE )FROM {table_regex}", query)
 
         ## JOIN
         join_tables = re.findall(f"JOIN {table_regex}", query)
@@ -54,54 +63,80 @@ class SQLAnalyzer:
         insert_tables = re.findall(f"INSERT (INTO )?{table_regex}", query)
         insert_tables = [x[1] for x in insert_tables]
 
+        # Others
+        ## DELETE FROM
+        delete_tables = re.findall(f"DELETE (FROM )?{table_regex}", query)
+        delete_tables = [x[1] for x in delete_tables]
+
         # define output
         query_source_tables = from_tables + join_tables
         query_output_tables = create_tables + insert_tables
-        return query_source_tables, query_output_tables
+        quert_delete_tables = delete_tables
+        return query_source_tables, query_output_tables, quert_delete_tables
 
-    def extract_sql(self, groups=False):
+    def extract_sql(self, sql_filepath, groups=False):
         group_source_tables = []
         group_output_tables = []
-        queries = self.read_lines(self.sql_filepath)
+        group_delete_tables = []
+        queries = self.read_lines(sql_filepath)
         for query in queries:
             query = self.remove_capsulated_comments(query)
-            query_source_tables, query_output_tables = self.extract_statement(query)
+            (
+                query_source_tables,
+                query_output_tables,
+                quert_delete_tables,
+            ) = self.extract_statement(query)
             group_source_tables.append(list(set(query_source_tables)))
             group_output_tables.append(list(set(query_output_tables)))
-        source_tables = [y for x in group_source_tables for y in x]
-        output_tables = [y for x in group_output_tables for y in x]
+            group_delete_tables.append(list(set(quert_delete_tables)))
+        source_tables = list(set([y for x in group_source_tables for y in x]))
+        output_tables = list(set([y for x in group_output_tables for y in x]))
+        delete_tables = list(set([y for x in group_delete_tables for y in x]))
         if groups:
-            return group_source_tables, group_output_tables
+            return group_source_tables, group_output_tables, group_delete_tables
         else:
             source_tables.sort()
             output_tables.sort()
+            delete_tables.sort()
             return {
                 "source_tables": source_tables,
                 "output_tables": output_tables,
+                "delete_tables": delete_tables,
             }
 
     def plot_inline(self):
-        group_source_tables, group_output_tables = self.extract_sql(groups=True)
         dot = graphviz.Digraph(strict=True)
-        dot.attr(label=self.script_name)
         dot.attr(rankdir="LR")
+        for i, sql_script in enumerate(self.sql_scripts):
+            script_tail_name = os.path.split(sql_script)[-1].replace(".sql", "")
+            (
+                group_source_tables,
+                group_output_tables,
+                group_delete_tables,
+            ) = self.extract_sql(sql_script, groups=True)
+            with dot.subgraph(name=f"cluster_{i}") as sg:
+                sg.attr(label=f"<<u>{script_tail_name}.sql</u>>", color="darkblue")
+                k = 1
+                for j, (source_tables, output_tables, delete_tables) in enumerate(
+                    zip(group_source_tables, group_output_tables, group_delete_tables)
+                ):
+                    if len(source_tables) + len(output_tables) > 0:
+                        with sg.subgraph(name=f"cluster_{k}") as ssg:
+                            ssg.attr(
+                                label=f"subquery_{k}", color="black", style="dashed"
+                            )
+                            ssg.node(f"{script_tail_name}_step_{k}", shape="box")
+                            # create edges
+                            for source_table in source_tables:
+                                ssg.edge(source_table, f"{script_tail_name}_step_{k}")
+                            for output_table in output_tables:
+                                ssg.edge(f"{script_tail_name}_step_{k}", output_table)
+                            for delete_table in delete_tables:
+                                ssg.node(delete_table, color="darkred")
+                                ssg.edge(f"{script_tail_name}_step_{k}", delete_table)
+                        k += 1
 
-        k = 0
-        for i, (source_tables, output_tables) in enumerate(
-            zip(group_source_tables, group_output_tables)
-        ):
-            if len(source_tables) + len(output_tables) > 0:
-                with dot.subgraph(name=f"cluster_{k}") as sg:
-                    sg.attr(label=f"subquery_{k}")
-                    sg.node(f"logic_{k}", shape="box")
-                    # create edges
-                    for source_table in source_tables:
-                        sg.edge(source_table, f"logic_{k}")
-                    for output_table in output_tables:
-                        sg.edge(f"logic_{k}", output_table)
-                k += 1
+        dot.render("output", format="png")
+        os.remove("output")
 
-        dot.render(self.script_name.replace(".sql", ""), format="png")
-        os.remove(self.script_name.replace(".sql", ""))
-
-        return Image(filename=self.script_name.replace(".sql", ".png"))
+        return Image(filename=sql_script.replace(".sql", ".png"))

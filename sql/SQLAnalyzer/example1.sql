@@ -16,8 +16,3 @@ cte2 as
 SELECT     *
 FROM
 cte;
-
-INSERT into insert.table.name
-SELECT *
-FROM
-create.table.name;
