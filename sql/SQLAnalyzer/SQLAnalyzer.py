@@ -146,4 +146,4 @@ class SQLAnalyzer:
         dot.render("output", format="png")
         os.remove("output")
 
-        return Image(filename=sql_script.replace(".sql", ".png"))
+        return Image(filename="output.png")
