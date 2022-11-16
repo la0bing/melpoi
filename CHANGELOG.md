@@ -2,6 +2,17 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.1 (2022-11-16)
+### Fix
+* README update ([`a143fcf`](https://github.com/la0bing/melpoi/commit/a143fcfd18aeb07768b1a431299ea5b42d3c3275))
+* README update ([`b623eab`](https://github.com/la0bing/melpoi/commit/b623eab931df29e29dfcdcabdcd3db7a076ce925))
+* Shorter imports for SQLAnalyzer ([`a6f7842`](https://github.com/la0bing/melpoi/commit/a6f7842cb427e8cb6374223a347732fc3eb787b5))
+
+### Documentation
+* Exmaples update ([`13c2582`](https://github.com/la0bing/melpoi/commit/13c2582bfab5554c8475b605acd805fa6693bb75))
+* Moved examples out from src ([`209df4c`](https://github.com/la0bing/melpoi/commit/209df4ceaca45d968b62d26ecf3bd47097cf94cc))
+* Moved examples out from src ([`45f7d8d`](https://github.com/la0bing/melpoi/commit/45f7d8def99b6e8d696f4825796243928022c1d4))
+
 ## v0.1.0 (2022-11-16)
 ### Feature
 * First usable release ([`189f405`](https://github.com/la0bing/melpoi/commit/189f40599088d01a7be6d823c23602e5b2ecf81c))
