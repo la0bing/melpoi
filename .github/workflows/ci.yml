@@ -49,6 +49,9 @@ jobs:
     concurrency: release
 
     steps:
+    - name: View author
+      run: echo "${{ github.event.commits[0].author.name }} ."
+
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
@@ -57,7 +60,6 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: 3.8
-      run: echo "${{ github.event.commits[0].author.name }} ."
 
     - name: Python Semantic Release
       uses: relekang/python-semantic-release@master
