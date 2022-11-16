@@ -1,16 +1,21 @@
-name: Publish Release
+name: Semantic Release
+
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - master
+
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
+    concurrency: release
+
     steps:
     - uses: actions/checkout@v3
-    - name: Create a Release
-      uses: elgohr/Github-Release-Action@v4
-      env:
-        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+
+    - name: Python Semantic Release
+      uses: relekang/python-semantic-release@master
       with:
-        title: ${{  github.ref_name }}
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        repository_username: __token__
+        repository_password: ${{ secrets.PYPI_TOKEN }}
