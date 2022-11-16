@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.0.13 (2022-11-16)
+### Fix
+* Fix redundant github actions ([`730d965`](https://github.com/la0bing/melpoi/commit/730d96515c0ac490a3972666b54f5b1d8ca0c476))
+* Fix redundant github actions ([`ad6b5b4`](https://github.com/la0bing/melpoi/commit/ad6b5b4bc224969c167d873cfc7efdd155e144a2))
+
 ## v0.0.12 (2022-11-16)
 ### Fix
 * Fix redundant github actions ([`e971a97`](https://github.com/la0bing/melpoi/commit/e971a97438d82079399f266b68fb20128c655925))
