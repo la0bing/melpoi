@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v0.0.6 (2022-11-16)
+### Fix
+* Testing ci ([`9fd0e06`](https://github.com/la0bing/melpoi/commit/9fd0e062f282b67546f68ca5084097e3f901b248))
+* Testing ci ([`fee2584`](https://github.com/la0bing/melpoi/commit/fee258420d28a8bb2f2df0acfdad9ffe35f7eee3))
+* Testing ci ([`2031259`](https://github.com/la0bing/melpoi/commit/20312590865f2c16cf47ddf65eaad20d8b8ec0fd))
+* Testing ci ([`a24d463`](https://github.com/la0bing/melpoi/commit/a24d46315af21b2ffb3d42abc96471b3c460fe65))
+* Testing ci ([`0fbaaac`](https://github.com/la0bing/melpoi/commit/0fbaaac8a82b3da4a81175fe7c18806ed876c63b))
+
 ## v0.0.5 (2022-11-16)
 ### Fix
 * Ci test ([`0e202bf`](https://github.com/la0bing/melpoi/commit/0e202bf55e274605c193b55e5bf8cc225cf682c7))
