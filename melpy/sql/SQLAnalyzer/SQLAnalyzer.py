@@ -107,10 +107,10 @@ class SQLAnalyzer:
     def get_dependencies(self):
         output = {}
         for i, sql_script in enumerate(self.sql_scripts):
-            script_tail_name = os.path.split(sql_script)[-1].replace(".sql", "")
+            # script_tail_name = os.path.split(sql_script)[-1].replace(".sql", "")
             output[sql_script] = self.extract_sql(sql_script)
         return output
-    
+
     def plot_inline(self):
         dot = graphviz.Digraph(strict=True)
         dot.attr(rankdir="LR")
