@@ -44,6 +44,7 @@ jobs:
 
   release:
     # needs: checks
+    if: github.event.commits[0].author.name != 'GitHubActions'
     runs-on: ubuntu-latest
     concurrency: release
 
