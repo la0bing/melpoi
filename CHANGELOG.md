@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.0.9 (2022-11-16)
+### Fix
+* Semver config change ([`2c3b5f8`](https://github.com/la0bing/melpoi/commit/2c3b5f8001d11f762b799dbdc7bb9237c0461c76))
+
 ## v0.0.8 (2022-11-16)
 ### Fix
 * Semver config change ([`f10f26a`](https://github.com/la0bing/melpoi/commit/f10f26afd99eb148530b4fff8786896813d6669b))
