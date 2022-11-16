@@ -1,3 +1,24 @@
+[tool.poetry]
+name = "melpy"
+version = "0.1.0"
+description = ""
+authors = ["Melvin Low <la0bing07148@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.7,<3.11"
+selenium = "^4.6.0"
+opencv-python = "^4.6.0.66"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^2.20.0"
+python-semantic-release = "^7.32.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.isort]
 multi_line_output = 3
 include_trailing_comma = true
