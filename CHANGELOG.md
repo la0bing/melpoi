@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.0.4 (2022-11-16)
+### Fix
+* Versioning ([`3e972b4`](https://github.com/la0bing/melpoi/commit/3e972b464dda807247a0b1eb827fc59a1f6c99dc))
+* Verioning ([`46ea05a`](https://github.com/la0bing/melpoi/commit/46ea05a59804afa98f2c8e289661f80200337c71))
+
 ## v0.0.3 (2022-11-16)
 ### Fix
 * Test PR ([`fc74ab0`](https://github.com/la0bing/melpoi/commit/fc74ab0b86a2afd104bf1f3b5999bd1519a98cee))
