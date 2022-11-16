@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.0.12 (2022-11-16)
+### Fix
+* Fix redundant github actions ([`e971a97`](https://github.com/la0bing/melpoi/commit/e971a97438d82079399f266b68fb20128c655925))
+
 ## v0.0.11 (2022-11-16)
 ### Fix
 * Semver config change ([`24e9e6e`](https://github.com/la0bing/melpoi/commit/24e9e6e9d3c2959c4ad0f6119a28cf8946797874))

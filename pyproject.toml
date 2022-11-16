@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "melpoi"
-version = "0.0.11"
+version = "0.0.12"
 description = ""
 authors = ["Melvin Low <la0bing07148@gmail.com>"]
 license = "MIT"
