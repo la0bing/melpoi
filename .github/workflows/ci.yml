@@ -63,3 +63,4 @@ jobs:
     - uses: bjoluc/semantic-release-config-poetry@v2
       with:
         pypi_token: ${{ secrets.PYPI_TOKEN }}
+        RELEASE_BRANCH: master
