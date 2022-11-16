@@ -44,7 +44,7 @@ jobs:
 
   release:
     # needs: checks
-    if: github.event.commits[0].author.name != 'GitHubActions'
+    if: github.event.commits[0].author.name != 'github-actions'
     runs-on: ubuntu-latest
     concurrency: release
 
@@ -57,6 +57,7 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: 3.8
+      run: echo "${{ github.event.commits[0].author.name }} ."
 
     - name: Python Semantic Release
       uses: relekang/python-semantic-release@master
