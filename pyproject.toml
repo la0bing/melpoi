@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "melpy"
+name = "melpoi"
 version = "0.0.1"
 description = ""
 authors = ["Melvin Low <la0bing07148@gmail.com>"]
