@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.0 (2022-11-16)
+### Feature
+* First usable release ([`189f405`](https://github.com/la0bing/melpoi/commit/189f40599088d01a7be6d823c23602e5b2ecf81c))
+
 ## v0.0.13 (2022-11-16)
 ### Fix
 * Fix redundant github actions ([`730d965`](https://github.com/la0bing/melpoi/commit/730d96515c0ac490a3972666b54f5b1d8ca0c476))
