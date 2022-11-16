@@ -1,7 +1,0 @@
-# repo wide
-pre-commit
-
-# scrape related
-## website-monitor
-selenium
-opencv-python
