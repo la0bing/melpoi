@@ -52,6 +52,7 @@ jobs:
       with:
         fetch-depth: 0
         persist-credentials: false
+        token: ${{ secrets.CI_GITHUB_TOKEN }}
 
     - uses: actions/setup-python@v4
       with:
