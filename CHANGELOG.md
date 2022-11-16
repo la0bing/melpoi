@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.0.5 (2022-11-16)
+### Fix
+* Ci test ([`0e202bf`](https://github.com/la0bing/melpoi/commit/0e202bf55e274605c193b55e5bf8cc225cf682c7))
+
 ## v0.0.4 (2022-11-16)
 ### Fix
 * Versioning ([`3e972b4`](https://github.com/la0bing/melpoi/commit/3e972b464dda807247a0b1eb827fc59a1f6c99dc))
