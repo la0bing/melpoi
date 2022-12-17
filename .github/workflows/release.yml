@@ -8,9 +8,8 @@ on:
       - master
 
 jobs:
-  checks:
-    if: github.event.commits[0].author.name != 'github-actions'
-    uses: ./.github/workflows/test.yml
+  if: github.event.commits[0].author.name != 'github-actions'
+  uses: ./.github/workflows/test.yml
 
   release:
     needs: checks
