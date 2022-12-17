@@ -1,10 +1,10 @@
-# run checks and tests
+# workflow to mark checks pass when non path related changes
 
-name: run tests
+name: test
 
 on:
   pull_request:
-    paths:
+    paths-ignore:
       - .github/workflows/**
       - melpoi/**
       - tests/**
@@ -14,4 +14,4 @@ on:
 
 jobs:
   checks:
-    uses: ./.github/workflows/test.yml
+    uses: ./.github/workflows/dummy_test.yml
