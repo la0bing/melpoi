@@ -13,7 +13,5 @@ on:
       - pyproject.toml
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - run: 'echo "No test required"'
+  checks:
+    uses: ./.github/workflows/dummy_test.yml

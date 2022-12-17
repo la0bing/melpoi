@@ -13,4 +13,5 @@ on:
       - pyproject.toml
 
 jobs:
-  uses: ./.github/workflows/test.yml
+  checks:
+    uses: ./.github/workflows/test.yml
