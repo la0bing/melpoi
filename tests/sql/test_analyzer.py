@@ -16,7 +16,7 @@ def test_SQLAnalyzer1():
                 "FROM.TABLE.NAME2",
                 "JOIN.TABLE.NAME1",
             ],
-            "output_tables": ["CREATE.TABLE.NAM"],
+            "output_tables": ["CREATE.TABLE.NAME"],
             "delete_tables": [],
         }
     }
