@@ -1,6 +1,6 @@
 # run checks and tests, release if everything pass, github-actions will create a new commit to bump version and update CHANGELOG.md
 
-name: Test and Release
+name: release
 
 on:
   push:
@@ -9,7 +9,6 @@ on:
 
 jobs:
   checks:
-    # needs: checks
     if: github.event.commits[0].author.name != 'github-actions'
     runs-on: ubuntu-latest
     steps:
@@ -45,7 +44,7 @@ jobs:
 
 
   release:
-    # needs: checks
+    needs: checks
     if: github.event.commits[0].author.name != 'github-actions'
     runs-on: ubuntu-latest
     concurrency: release
