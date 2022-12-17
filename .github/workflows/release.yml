@@ -6,6 +6,10 @@ on:
   push:
     branches:
       - master
+    paths:
+      - melpoi/**
+      - poetry.lock
+      - pyproject.toml
 
 jobs:
   checks:

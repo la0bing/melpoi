@@ -5,12 +5,12 @@ name: test
 on:
   pull_request:
     paths-ignore:
-      - .github/workflows/**
       - melpoi/**
-      - tests/**
-      - .flake8
       - poetry.lock
       - pyproject.toml
+      - .github/workflows/**
+      - tests/**
+      - .flake8
 
 jobs:
   checks:
