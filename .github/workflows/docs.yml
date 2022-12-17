@@ -1,0 +1,19 @@
+# workflow to mark checks pass when non path related changes
+
+name: test
+
+on:
+  pull_request:
+    paths-ignore:
+      - .github/workflows/**
+      - melpoi/**
+      - tests/**
+      - .flake8
+      - poetry.lock
+      - pyproject.toml
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+    - run: 'echo "No build required"'
