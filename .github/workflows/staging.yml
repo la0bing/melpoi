@@ -5,12 +5,12 @@ name: run tests
 on:
   pull_request:
     paths:
-      - .github/workflows/**
       - melpoi/**
-      - tests/**
-      - .flake8
       - poetry.lock
       - pyproject.toml
+      - .github/workflows/**
+      - tests/**
+      - .flake8
 
 jobs:
   checks:
