@@ -36,6 +36,7 @@ class SQLAnalyzer:
         return queries
 
     def extract_statement(self, query):
+        # TABLENAMES(search for word after FROM with 2 dots in its name, with or without backticks)
         if self.min_dot == 0:
             table_regex = r"`?([A-Z0-9\-_]*\.?[A-Z0-9\-_]*\.?[A-Z0-9\-_]+)`?"
         elif self.min_dot == 1:
@@ -45,8 +46,10 @@ class SQLAnalyzer:
         else:
             raise Exception("min_dot range must be between 0 and 2")
         # Source
-        ## FROM (search for word after FROM with 2 dots in its name, with or without backticks)
-        from_tables = re.findall(f"(?!DELETE )FROM {table_regex}", query)
+        ## FROM = ALL FROM - DELETE FROM
+        from_tables = re.findall(f"FROM {table_regex}", query)
+        delete_from_tables = re.findall(f"(?:DELETE )FROM {table_regex}", query)
+        from_no_delete_tables = [x for x in from_tables if x not in delete_from_tables]
 
         ## JOIN
         join_tables = re.findall(f"JOIN {table_regex}", query)
@@ -64,12 +67,11 @@ class SQLAnalyzer:
         insert_tables = [x[1] for x in insert_tables]
 
         # Others
-        ## DELETE FROM
-        delete_tables = re.findall(f"DELETE (FROM )?{table_regex}", query)
-        delete_tables = [x[1] for x in delete_tables]
+        ## DELETE
+        delete_tables = re.findall(f"DELETE (?:FROM )?{table_regex}", query)
 
         # define output
-        query_source_tables = from_tables + join_tables
+        query_source_tables = from_no_delete_tables + join_tables
         query_output_tables = create_tables + insert_tables
         quert_delete_tables = delete_tables
         return query_source_tables, query_output_tables, quert_delete_tables
