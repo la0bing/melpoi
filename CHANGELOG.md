@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.2 (2022-12-17)
+### Fix
+* Duplicate delete and source tables ([`cebc50f`](https://github.com/la0bing/melpoi/commit/cebc50fedd2bb6b471f290b5d6b984b5af2ff030))
+
+### Documentation
+* Added codeowners ([`37d503d`](https://github.com/la0bing/melpoi/commit/37d503d554f6314672d1b3834458a87094c51dba))
+
 ## v0.1.1 (2022-11-16)
 ### Fix
 * README update ([`a143fcf`](https://github.com/la0bing/melpoi/commit/a143fcfd18aeb07768b1a431299ea5b42d3c3275))
