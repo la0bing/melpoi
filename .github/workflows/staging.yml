@@ -1,6 +1,6 @@
 # run checks and tests
 
-name: Test and Release
+name: run tests
 
 on:
   pull_request:
