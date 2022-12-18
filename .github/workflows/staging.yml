@@ -1,6 +1,6 @@
 # run checks and tests
 
-name: run tests
+name: staging
 
 on:
   pull_request:
