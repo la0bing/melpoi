@@ -13,6 +13,6 @@ pip install melpoi
 - [SQL](https://github.com/la0bing/melpoi/tree/master/melpoi/sql)
 
 
-# Categories working in progerss
+# Work in progress
 - Dataset auto analyzer
 - AutoML

@@ -1,6 +1,6 @@
 # workflow to mark checks pass when non path related changes
 
-name: test
+name: docs
 
 on:
   pull_request:
