@@ -2,6 +2,14 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.3 (2022-12-18)
+### Fix
+* Remove scraping from melpoi ([`6af771a`](https://github.com/la0bing/melpoi/commit/6af771a5f5e1f62a69226975c5a759bdf044673a))
+
+### Documentation
+* Update README ([`8b163b6`](https://github.com/la0bing/melpoi/commit/8b163b6167a344b1d4eb0f1d701e2ce93c1cbcfd))
+* Fix broken release badge ([`6911ae3`](https://github.com/la0bing/melpoi/commit/6911ae30753d7b94ead520d6dcbe6e46b2554c3a))
+
 ## v0.1.2 (2022-12-17)
 ### Fix
 * Duplicate delete and source tables ([`cebc50f`](https://github.com/la0bing/melpoi/commit/cebc50fedd2bb6b471f290b5d6b984b5af2ff030))
