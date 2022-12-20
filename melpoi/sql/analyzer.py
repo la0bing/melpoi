@@ -7,7 +7,7 @@ import graphviz
 from IPython.display import Image
 
 
-class SQLAnalyzer:
+class SqlAnalyzer:
     def __init__(self, sql_filepath, min_dot=1) -> None:
         self.min_dot = min_dot
         self.sql_filepath = sql_filepath

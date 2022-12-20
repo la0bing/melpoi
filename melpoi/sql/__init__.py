@@ -1,1 +1,1 @@
-from melpoi.sql.analyzer import SQLAnalyzer
+from melpoi.sql.analyzer import SqlAnalyzer
