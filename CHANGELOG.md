@@ -2,6 +2,13 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.4 (2022-12-20)
+### Fix
+* Changed naming convention for SqlAnalyzer ([`8967e92`](https://github.com/la0bing/melpoi/commit/8967e92b292f56db335e9f7e813aab9e7dd85233))
+
+### Documentation
+* Fix typo ([`d43c4b8`](https://github.com/la0bing/melpoi/commit/d43c4b8782158738c4120163f5382a31f1e2f126))
+
 ## v0.1.3 (2022-12-18)
 ### Fix
 * Remove scraping from melpoi ([`6af771a`](https://github.com/la0bing/melpoi/commit/6af771a5f5e1f62a69226975c5a759bdf044673a))
