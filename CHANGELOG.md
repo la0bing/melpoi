@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.0 (2023-01-02)
+### Feature
+* Added dataframe analyzer ([`68c67eb`](https://github.com/la0bing/melpoi/commit/68c67ebd67ee761e8d38a7d196853695c137e45d))
+* Added pandas library to dependencies ([`c9640b1`](https://github.com/la0bing/melpoi/commit/c9640b1ab4431e310a377ac1cce91e9a87431434))
+
 ## v0.1.4 (2022-12-20)
 ### Fix
 * Changed naming convention for SqlAnalyzer ([`8967e92`](https://github.com/la0bing/melpoi/commit/8967e92b292f56db335e9f7e813aab9e7dd85233))
