@@ -3,7 +3,7 @@
 name: staging
 
 on:
-  pull_request:
+  pull_request_target:
     paths:
       - melpoi/**
       - poetry.lock
