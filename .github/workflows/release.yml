@@ -3,6 +3,7 @@
 name: release
 
 on:
+  workflow_dispatch:
   schedule:
     # scheduled to release every 14th of month
     - cron:  '0 0 14 * *'
