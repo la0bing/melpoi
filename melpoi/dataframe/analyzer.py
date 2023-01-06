@@ -98,12 +98,12 @@ class DataFrameAnalyzer:
                 self._log_remarks(col, "Slight NaN % found!")
 
             ## if convertable from float to int
-            if (col_info.dtype == "float") and (col_info.na_count > 0):
+            if (isinstance(col_info.dtype, FloatDataType)) and (col_info.na_count > 0):
                 try:
                     col_without_na = self.__df[~self.__df[col].isna()][col]
                     int_col_without_na = col_without_na.astype(int)
                     if ((col_without_na - int_col_without_na) == 0).all():
-                        self._log_remarks(col, "Possible float cause by NaN values")
+                        self._log_remarks(col, "Possible float caused by NaN values")
                 except IntCastingNaNError:
                     pass
 
