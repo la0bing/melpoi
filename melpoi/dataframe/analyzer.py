@@ -7,7 +7,14 @@ from pandas.api.types import (
 )
 from pandas.errors import IntCastingNaNError
 
-from melpoi.dataframe.metadata import Column, DataFrameInfo
+from melpoi.dataframe.metadata import (
+    Column,
+    DataFrameInfo,
+    DatetimeDataType,
+    FloatDataType,
+    IntegerDataType,
+    StringDataType,
+)
 
 
 class DataFrameAnalyzer:
@@ -35,22 +42,18 @@ class DataFrameAnalyzer:
     def _assign_columns(self):
         out_columns = {}
         for col in self.__df.columns:
-            out_columns[col] = Column(col)
+            out_columns[col] = Column(col, dtype=self._detect_column_type(col))
         self.__df_info = DataFrameInfo(out_columns)
 
     def _detect_column_type(self, col):
         if is_string_dtype(self.__df[col]):
-            return "string"
+            return StringDataType()
         elif is_integer_dtype(self.__df[col]):
-            return "integer"
+            return IntegerDataType()
         elif is_float_dtype(self.__df[col]):
-            return "float"
+            return FloatDataType()
         elif is_datetime64_any_dtype(self.__df[col]):
-            return "datetime"
-
-    def _detect_columns_type(self):
-        for col in self.__df.columns:
-            self.__df_info.columns[col].dtype = self._detect_column_type(col)
+            return DatetimeDataType()
 
     def _count_na(self):
         na_df = self.__df.isna().sum()
@@ -113,6 +116,7 @@ class DataFrameAnalyzer:
         data = []
         for col, col_info in self.__df_info.columns.items():
             row = col_info.unpack()
+            row["dtype"] = row["dtype"]["name"]
             data.append(row)
         self.__column_info_df = pd.DataFrame(data)
 
@@ -130,9 +134,6 @@ class DataFrameAnalyzer:
         ## distinct
         self._count_distinct()
 
-        # detect column types
-        self._detect_columns_type()
-
         # add remarks to certain columns
         self._generate_columns_remarks()
 
@@ -141,5 +142,6 @@ class DataFrameAnalyzer:
 
         # in depth analysis
 
-        # set column info df
+        # convert df_info.columns into column_info
+        ## set column info df
         self._set_column_info_df()
