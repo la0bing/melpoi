@@ -3,9 +3,34 @@ from typing import Dict, List
 
 
 @dataclass
+class BaseDataType:
+    name: str
+
+
+@dataclass
+class StringDataType(BaseDataType):
+    name: str = "string"
+
+
+@dataclass
+class FloatDataType(BaseDataType):
+    name: str = "float"
+
+
+@dataclass
+class IntegerDataType(BaseDataType):
+    name: str = "integer"
+
+
+@dataclass
+class DatetimeDataType(BaseDataType):
+    name: str = "datetime"
+
+
+@dataclass
 class Column:
     name: str
-    dtype: str = None
+    dtype: BaseDataType = None
     distinct_count: int = 0
     na_count: int = 0
     na_percentage: float = 0

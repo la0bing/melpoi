@@ -31,7 +31,7 @@ def test_DataFrameAnalyzer1():
             2,
             100,
             66.7,
-            "High NaN % found!, Possible float cause by NaN values",
+            "High NaN % found!, Possible float caused by NaN values",
         ],
     ]
     load_df_assert("tests/dataframe/data/iris.csv", target)
