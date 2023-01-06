@@ -11,6 +11,7 @@ pip install melpoi
 
 # Categories
 - [SQL](https://github.com/la0bing/melpoi/tree/master/melpoi/sql)
+- [DataFrame](https://github.com/la0bing/melpoi/tree/master/melpoi/dataframe)
 
 
 # Work in progress
