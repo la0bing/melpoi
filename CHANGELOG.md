@@ -2,6 +2,16 @@
 
 <!--next-version-placeholder-->
 
+## v0.2.1 (2023-01-14)
+### Fix
+* DataFrameAnalyzer run flow ([`78cd900`](https://github.com/la0bing/melpoi/commit/78cd900756ded5ed3607a111678d51edbf5fb8b5))
+* Incorrect checking type after new fix ([`e21bc3a`](https://github.com/la0bing/melpoi/commit/e21bc3aed8bd2f74d076b53cd657dc73bd08c044))
+* Added new class for dtypes ([`87d6a73`](https://github.com/la0bing/melpoi/commit/87d6a73c7db943dc906e3b24ea59a179d60b1a64))
+
+### Documentation
+* Samples cleanup ([`487fdfd`](https://github.com/la0bing/melpoi/commit/487fdfd86cea6bb770f307c2e591efdfe3d9718e))
+* Cleanup for sql and added for dataframe ([`e470624`](https://github.com/la0bing/melpoi/commit/e470624179431b8b921fb34f5e1bf11248af1e89))
+
 ## v0.2.0 (2023-01-02)
 ### Feature
 * Added dataframe analyzer ([`68c67eb`](https://github.com/la0bing/melpoi/commit/68c67ebd67ee761e8d38a7d196853695c137e45d))
