@@ -3,8 +3,10 @@ A python class to parse and analyze SQL scripts dependencies and outputs. This i
 
 ## Get Started
 The following libraries are needed:
-  - Graphviz
   - Ipython (for viewing image in jupyter notebooks)
+
+## Optional Dependencies
+  - Graphviz: This library is used for visualizing SQL dependencies. While the melpoi library can function without Graphviz, installing it enables the visualization of SQL dependencies. If Graphviz is not installed, the SqlAnalyzer class will still function but without the ability to visualize SQL dependencies.
 
 ## Usage
 ### 1. Visualize
