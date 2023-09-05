@@ -33,3 +33,20 @@ def test_SqlAnalyzer2():
         }
     }
     run_on_file("tests/sql/sql_scripts/test2.sql", expected_dict)
+
+# test_SqlAnalyzer_no_graphviz
+def test_SqlAnalyzer_no_graphviz():
+    sql_a = SqlAnalyzer("tests/sql/sql_scripts/test1.sql", 1)
+    out_dict = sql_a.get_dependencies()
+    assert out_dict == {
+        "tests/sql/sql_scripts/test1.sql": {
+            "source_tables": [
+                "FROM.TABLE.NAME1",
+                "FROM.TABLE.NAME2",
+                "JOIN.TABLE.NAME1",
+            ],
+            "output_tables": ["CREATE.TABLE.NAME"],
+            "delete_tables": [],
+        }
+    }
+    assert sql_a.plot_inline() == "Graphviz is not installed. Visualization is not available."
