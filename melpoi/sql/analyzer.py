@@ -3,7 +3,11 @@ import re
 from tkinter.ttk import Style
 from turtle import color
 
-import graphviz
+try:
+    import graphviz
+    graphviz_available = True
+except ImportError:
+    graphviz_available = False
 from IPython.display import Image
 
 
@@ -113,39 +117,41 @@ class SqlAnalyzer:
             output[sql_script] = self.extract_sql(sql_script)
         return output
 
-    def plot_inline(self):
-        dot = graphviz.Digraph(strict=True)
-        dot.attr(rankdir="LR")
-        for i, sql_script in enumerate(self.sql_scripts):
-            script_tail_name = os.path.split(sql_script)[-1].replace(".sql", "")
-            (
-                group_source_tables,
-                group_output_tables,
-                group_delete_tables,
-            ) = self.extract_sql(sql_script, groups=True)
-            with dot.subgraph(name=f"cluster_{i}") as sg:
-                sg.attr(label=f"<<u>{script_tail_name}.sql</u>>", color="darkblue")
-                k = 1
-                for j, (source_tables, output_tables, delete_tables) in enumerate(
-                    zip(group_source_tables, group_output_tables, group_delete_tables)
-                ):
-                    if len(source_tables) + len(output_tables) > 0:
-                        with sg.subgraph(name=f"cluster_{k}") as ssg:
-                            ssg.attr(
-                                label=f"subquery_{k}", color="black", style="dashed"
-                            )
-                            ssg.node(f"{script_tail_name}_step_{k}", shape="box")
-                            # create edges
-                            for source_table in source_tables:
-                                ssg.edge(source_table, f"{script_tail_name}_step_{k}")
-                            for output_table in output_tables:
-                                ssg.edge(f"{script_tail_name}_step_{k}", output_table)
-                            for delete_table in delete_tables:
-                                ssg.node(delete_table, color="darkred")
-                                ssg.edge(f"{script_tail_name}_step_{k}", delete_table)
-                        k += 1
+def plot_inline(self):
+    if not graphviz_available:
+        return "Graphviz is not installed. Visualization is not available."
+    dot = graphviz.Digraph(strict=True)
+    dot.attr(rankdir="LR")
+    for i, sql_script in enumerate(self.sql_scripts):
+        script_tail_name = os.path.split(sql_script)[-1].replace(".sql", "")
+        (
+            group_source_tables,
+            group_output_tables,
+            group_delete_tables,
+        ) = self.extract_sql(sql_script, groups=True)
+        with dot.subgraph(name=f"cluster_{i}") as sg:
+            sg.attr(label=f"<<u>{script_tail_name}.sql</u>>", color="darkblue")
+            k = 1
+            for j, (source_tables, output_tables, delete_tables) in enumerate(
+                zip(group_source_tables, group_output_tables, group_delete_tables)
+            ):
+                if len(source_tables) + len(output_tables) > 0:
+                    with sg.subgraph(name=f"cluster_{k}") as ssg:
+                        ssg.attr(
+                            label=f"subquery_{k}", color="black", style="dashed"
+                        )
+                        ssg.node(f"{script_tail_name}_step_{k}", shape="box")
+                        # create edges
+                        for source_table in source_tables:
+                            ssg.edge(source_table, f"{script_tail_name}_step_{k}")
+                        for output_table in output_tables:
+                            ssg.edge(f"{script_tail_name}_step_{k}", output_table)
+                        for delete_table in delete_tables:
+                            ssg.node(delete_table, color="darkred")
+                            ssg.edge(f"{script_tail_name}_step_{k}", delete_table)
+                    k += 1
 
-        dot.render("output", format="png")
-        os.remove("output")
+    dot.render("output", format="png")
+    os.remove("output")
 
-        return Image(filename="output.png")
+    return Image(filename="output.png")
